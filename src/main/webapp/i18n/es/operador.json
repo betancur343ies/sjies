@@ -1,0 +1,26 @@
+
+{
+    "sjiesApp": {
+        "operador" : {
+            "home": {
+                "title": "Operadors",
+                "createLabel": "Crear nuevo Operador",
+                "createOrEditLabel": "Crear o editar Operador"
+            },
+            "created": "Un nuevo Operador ha sido creado con el identificador {{ param }}",
+            "updated": "Un Operador ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Operador ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Operador {{ id }}?"
+            },
+            "detail": {
+                "title": "Operador"
+            },
+            "nombre": "Nombre",
+            "fechaCreacion": "Fecha Creacion",
+            "totalSorteos": "Total Sorteos",
+            "sorteosActivos": "Sorteos Activos",
+            "sorteo": "Sorteo"
+        }
+    }
+}

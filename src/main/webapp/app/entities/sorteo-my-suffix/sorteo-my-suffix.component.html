@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="sjiesApp.sorteo.home.title">Sorteos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-sorteo-my-suffix" [routerLink]="['/sorteo-my-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="sjiesApp.sorteo.home.createLabel">
+            Create new Sorteo
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="sorteos">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nombre"><span jhiTranslate="sjiesApp.sorteo.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tipo"><span jhiTranslate="sjiesApp.sorteo.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fechaCreacion"><span jhiTranslate="sjiesApp.sorteo.fechaCreacion">Fecha Creacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estado"><span jhiTranslate="sjiesApp.sorteo.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fechaRealizacion"><span jhiTranslate="sjiesApp.sorteo.fechaRealizacion">Fecha Realizacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ganador"><span jhiTranslate="sjiesApp.sorteo.ganador">Ganador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="operadorNombre"><span jhiTranslate="sjiesApp.sorteo.operador">Operador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let sorteo of sorteos ;trackBy: trackId">
+                <td><a [routerLink]="['/sorteo-my-suffix', sorteo.id, 'view' ]">{{sorteo.id}}</a></td>
+                <td>{{sorteo.nombre}}</td>
+                <td jhiTranslate="{{'sjiesApp.Juegos.' + sorteo.tipo}}">{{sorteo.tipo}}</td>
+                <td>{{sorteo.fechaCreacion | date:'medium'}}</td>
+                <td jhiTranslate="{{'sjiesApp.Estado.' + sorteo.estado}}">{{sorteo.estado}}</td>
+                <td>{{sorteo.fechaRealizacion | date:'medium'}}</td>
+                <td>{{sorteo.ganador}}</td>
+                <td>
+                    <div *ngIf="sorteo.operadorId">
+                        <a [routerLink]="['../operador-my-suffix', sorteo.operadorId , 'view' ]" >{{sorteo.operadorNombre}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/sorteo-my-suffix', sorteo.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/sorteo-my-suffix', sorteo.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'sorteo-my-suffix/'+ sorteo.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="sorteos && sorteos.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

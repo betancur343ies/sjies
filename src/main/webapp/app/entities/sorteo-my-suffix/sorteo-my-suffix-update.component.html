@@ -1,0 +1,109 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-sorteo-my-suffix-heading" jhiTranslate="sjiesApp.sorteo.home.createOrEditLabel">Create or edit a Sorteo</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!sorteo.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="sorteo.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sjiesApp.sorteo.nombre" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                        [(ngModel)]="sorteo.nombre" required/>
+                    <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nombre?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sjiesApp.sorteo.tipo" for="field_tipo">Tipo</label>
+                    <select class="form-control" name="tipo" [(ngModel)]="sorteo.tipo" id="field_tipo"  required>
+                        <option value="RULETA">{{'sjiesApp.Juegos.RULETA' | translate}}</option>
+                        <option value="DADOS">{{'sjiesApp.Juegos.DADOS' | translate}}</option>
+                        <option value="LA24">{{'sjiesApp.Juegos.LA24' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.tipo?.dirty && editForm.controls.tipo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.tipo?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sjiesApp.sorteo.fechaCreacion" for="field_fechaCreacion">Fecha Creacion</label>
+                    <div class="d-flex">
+                        <input id="field_fechaCreacion" type="datetime-local" class="form-control" name="fechaCreacion" [(ngModel)]="fechaCreacion"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.fechaCreacion?.dirty && editForm.controls.fechaCreacion?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fechaCreacion?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.fechaCreacion?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sjiesApp.sorteo.estado" for="field_estado">Estado</label>
+                    <select class="form-control" name="estado" [(ngModel)]="sorteo.estado" id="field_estado"  required>
+                        <option value="ACTIVO">{{'sjiesApp.Estado.ACTIVO' | translate}}</option>
+                        <option value="INACTIVO">{{'sjiesApp.Estado.INACTIVO' | translate}}</option>
+                        <option value="FINALIZADO">{{'sjiesApp.Estado.FINALIZADO' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.estado?.dirty && editForm.controls.estado?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.estado?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sjiesApp.sorteo.fechaRealizacion" for="field_fechaRealizacion">Fecha Realizacion</label>
+                    <div class="d-flex">
+                        <input id="field_fechaRealizacion" type="datetime-local" class="form-control" name="fechaRealizacion" [(ngModel)]="fechaRealizacion"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.fechaRealizacion?.dirty && editForm.controls.fechaRealizacion?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fechaRealizacion?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.fechaRealizacion?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sjiesApp.sorteo.ganador" for="field_ganador">Ganador</label>
+                    <input type="text" class="form-control" name="ganador" id="field_ganador"
+                        [(ngModel)]="sorteo.ganador" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sjiesApp.sorteo.operador" for="field_operador">Operador</label>
+                    <select class="form-control" id="field_operador" name="operador" [(ngModel)]="sorteo.operadorId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="operadorOption.id" *ngFor="let operadorOption of operadors; trackBy: trackOperadorById">{{operadorOption.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

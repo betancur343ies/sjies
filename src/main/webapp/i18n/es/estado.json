@@ -1,0 +1,10 @@
+{
+    "sjiesApp": {
+        "Estado" : {
+            "null": "",
+            "ACTIVO": "ACTIVO",
+            "INACTIVO": "INACTIVO",
+            "FINALIZADO": "FINALIZADO"
+        }
+    }
+}

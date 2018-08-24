@@ -1,0 +1,45 @@
+{
+    "name": "Operador",
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fechaCreacion",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "totalSorteos",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "sorteosActivos",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "sorteo",
+            "otherEntityName": "sorteo",
+            "otherEntityRelationshipName": "operador"
+        }
+    ],
+    "changelogDate": "20180824190436",
+    "entityTableName": "operador",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "mySuffix"
+}

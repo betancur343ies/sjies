@@ -1,0 +1,68 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="sjiesApp.operador.home.title">Operadors</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-operador-my-suffix" [routerLink]="['/operador-my-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="sjiesApp.operador.home.createLabel">
+            Create new Operador
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="operadors">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nombre"><span jhiTranslate="sjiesApp.operador.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fechaCreacion"><span jhiTranslate="sjiesApp.operador.fechaCreacion">Fecha Creacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalSorteos"><span jhiTranslate="sjiesApp.operador.totalSorteos">Total Sorteos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sorteosActivos"><span jhiTranslate="sjiesApp.operador.sorteosActivos">Sorteos Activos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let operador of operadors ;trackBy: trackId">
+                <td><a [routerLink]="['/operador-my-suffix', operador.id, 'view' ]">{{operador.id}}</a></td>
+                <td>{{operador.nombre}}</td>
+                <td>{{operador.fechaCreacion | date:'medium'}}</td>
+                <td>{{operador.totalSorteos}}</td>
+                <td>{{operador.sorteosActivos}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/operador-my-suffix', operador.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/operador-my-suffix', operador.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'operador-my-suffix/'+ operador.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="operadors && operadors.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

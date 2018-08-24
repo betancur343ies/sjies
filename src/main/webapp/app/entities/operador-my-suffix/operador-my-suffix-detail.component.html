@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="operador">
+            <h2><span jhiTranslate="sjiesApp.operador.detail.title">Operador</span> {{operador.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sjiesApp.operador.nombre">Nombre</span></dt>
+                <dd>
+                    <span>{{operador.nombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.operador.fechaCreacion">Fecha Creacion</span></dt>
+                <dd>
+                    <span>{{operador.fechaCreacion}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.operador.totalSorteos">Total Sorteos</span></dt>
+                <dd>
+                    <span>{{operador.totalSorteos}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.operador.sorteosActivos">Sorteos Activos</span></dt>
+                <dd>
+                    <span>{{operador.sorteosActivos}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/operador-my-suffix', operador.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

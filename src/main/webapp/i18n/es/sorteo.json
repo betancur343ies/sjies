@@ -1,0 +1,28 @@
+
+{
+    "sjiesApp": {
+        "sorteo" : {
+            "home": {
+                "title": "Sorteos",
+                "createLabel": "Crear nuevo Sorteo",
+                "createOrEditLabel": "Crear o editar Sorteo"
+            },
+            "created": "Un nuevo Sorteo ha sido creado con el identificador {{ param }}",
+            "updated": "Un Sorteo ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Sorteo ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Sorteo {{ id }}?"
+            },
+            "detail": {
+                "title": "Sorteo"
+            },
+            "nombre": "Nombre",
+            "tipo": "Tipo",
+            "fechaCreacion": "Fecha Creacion",
+            "estado": "Estado",
+            "fechaRealizacion": "Fecha Realizacion",
+            "ganador": "Ganador",
+            "operador": "Operador"
+        }
+    }
+}

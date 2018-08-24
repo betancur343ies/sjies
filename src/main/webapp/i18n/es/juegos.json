@@ -1,0 +1,10 @@
+{
+    "sjiesApp": {
+        "Juegos" : {
+            "null": "",
+            "RULETA": "RULETA",
+            "DADOS": "DADOS",
+            "LA24": "LA24"
+        }
+    }
+}

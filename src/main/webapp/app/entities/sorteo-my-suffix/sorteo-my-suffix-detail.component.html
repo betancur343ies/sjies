@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="sorteo">
+            <h2><span jhiTranslate="sjiesApp.sorteo.detail.title">Sorteo</span> {{sorteo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sjiesApp.sorteo.nombre">Nombre</span></dt>
+                <dd>
+                    <span>{{sorteo.nombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.sorteo.tipo">Tipo</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'sjiesApp.Juegos.' + sorteo.tipo}}">{{sorteo.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.sorteo.fechaCreacion">Fecha Creacion</span></dt>
+                <dd>
+                    <span>{{sorteo.fechaCreacion}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.sorteo.estado">Estado</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'sjiesApp.Estado.' + sorteo.estado}}">{{sorteo.estado}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.sorteo.fechaRealizacion">Fecha Realizacion</span></dt>
+                <dd>
+                    <span>{{sorteo.fechaRealizacion}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.sorteo.ganador">Ganador</span></dt>
+                <dd>
+                    <span>{{sorteo.ganador}}</span>
+                </dd>
+                <dt><span jhiTranslate="sjiesApp.sorteo.operador">Operador</span></dt>
+                <dd>
+                    <div *ngIf="sorteo.operadorId">
+                        <a [routerLink]="['/operador-my-suffix', sorteo.operadorId, 'view']">{{sorteo.operadorNombre}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/sorteo-my-suffix', sorteo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

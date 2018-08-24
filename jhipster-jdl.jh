@@ -1,0 +1,37 @@
+enum Estado {
+    ACTIVO, INACTIVO, FINALIZADO
+}
+
+enum Juegos {
+    RULETA, DADOS, LA24
+}
+
+entity Sorteo {
+	nombre String required,
+    tipo Juegos required,
+    fechaCreacion ZonedDateTime required,
+    fecha ZonedDateTime required,
+	estado Estado required 
+}
+
+entity Operador {
+	nombre String required,
+    fechaCreacion ZonedDateTime required,
+    totalSorteos Integer,
+    sorteosActivos Integer
+}
+
+// defining multiple oneToOne relationships
+relationship OneToMany {
+	Operador{sorteo} to Sorteo{operador}
+}
+
+// Set pagination options
+paginate Sorteo, Operador with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with mySuffix
