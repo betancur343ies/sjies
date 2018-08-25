@@ -1,11 +1,14 @@
 package co.com.iesonline.sjies.service;
 
 import co.com.iesonline.sjies.service.dto.OperadorDTO;
+import co.com.iesonline.sjies.service.dto.SorteoDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 /**
  * Service Interface for managing Operador.
@@ -43,4 +46,13 @@ public interface OperadorService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    /**
+     * Update "sorteosActivos" n "totalSorteos" Operator.
+     * 
+     * @param operatorId
+     * @param sorteoDTO
+     * @return
+     */
+    Long updateSorteosActivos(Long operatorId, @Valid SorteoDTO sorteoDTO);
 }

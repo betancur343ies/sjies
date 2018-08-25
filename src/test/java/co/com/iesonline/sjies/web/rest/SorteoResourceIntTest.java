@@ -4,6 +4,7 @@ import co.com.iesonline.sjies.SjiesApp;
 
 import co.com.iesonline.sjies.domain.Sorteo;
 import co.com.iesonline.sjies.repository.SorteoRepository;
+import co.com.iesonline.sjies.service.OperadorService;
 import co.com.iesonline.sjies.service.SorteoService;
 import co.com.iesonline.sjies.service.dto.SorteoDTO;
 import co.com.iesonline.sjies.service.mapper.SorteoMapper;
@@ -77,6 +78,9 @@ public class SorteoResourceIntTest {
 
     @Autowired
     private SorteoService sorteoService;
+    
+    @Autowired
+    private OperadorService operadorService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -97,7 +101,7 @@ public class SorteoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SorteoResource sorteoResource = new SorteoResource(sorteoService);
+        final SorteoResource sorteoResource = new SorteoResource(sorteoService, operadorService);
         this.restSorteoMockMvc = MockMvcBuilders.standaloneSetup(sorteoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

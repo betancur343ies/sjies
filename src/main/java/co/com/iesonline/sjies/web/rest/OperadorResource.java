@@ -54,6 +54,11 @@ public class OperadorResource {
         if (operadorDTO.getId() != null) {
             throw new BadRequestAlertException("A new operador cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        
+        //set counters in 0 by default
+        operadorDTO.setSorteosActivos(0);
+        operadorDTO.setTotalSorteos(0);
+        
         OperadorDTO result = operadorService.save(operadorDTO);
         return ResponseEntity.created(new URI("/api/operadors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

@@ -2,8 +2,10 @@ package co.com.iesonline.sjies.service.impl;
 
 import co.com.iesonline.sjies.service.OperadorService;
 import co.com.iesonline.sjies.domain.Operador;
+import co.com.iesonline.sjies.domain.enumeration.Estado;
 import co.com.iesonline.sjies.repository.OperadorRepository;
 import co.com.iesonline.sjies.service.dto.OperadorDTO;
+import co.com.iesonline.sjies.service.dto.SorteoDTO;
 import co.com.iesonline.sjies.service.mapper.OperadorMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Optional;
+
+import javax.validation.Valid;
 /**
  * Service Implementation for managing Operador.
  */
@@ -86,4 +90,38 @@ public class OperadorServiceImpl implements OperadorService {
         log.debug("Request to delete Operador : {}", id);
         operadorRepository.deleteById(id);
     }
+    
+    /**
+     * Update  sorteosActivos n totalSorteos of an Operator.
+     * 
+     * @param operatorId
+     * @param sorteoDTO
+     * @return
+     */
+    public Long updateSorteosActivos(Long operatorId, @Valid SorteoDTO sorteoDTO) {
+    	
+    	log.debug("Request to update Sorteos Info : {}", operatorId);
+    
+    	//find operator by id
+    	Optional<OperadorDTO> operadorDTO = findOne(operatorId);
+    	
+    	
+    	if (sorteoDTO.getEstado().equals(Estado.ACTIVO)) {
+    		
+    		//set sorteosActivos
+    		operadorDTO.get().setSorteosActivos(operadorDTO.get().getSorteosActivos() + 1);
+    		//set totalSorteos
+        	operadorDTO.get().setTotalSorteos(operadorDTO.get().getTotalSorteos() + 1);
+		} else {
+    		
+    		//set sorteosActivos
+    		operadorDTO.get().setSorteosActivos(operadorDTO.get().getSorteosActivos() - 1);
+		}
+    			   	
+    	
+    	//update Operator
+        OperadorDTO result = save(operadorDTO.get());
+        
+		return result.getId();
+	}
 }

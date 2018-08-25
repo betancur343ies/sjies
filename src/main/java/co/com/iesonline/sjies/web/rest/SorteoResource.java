@@ -1,6 +1,9 @@
 package co.com.iesonline.sjies.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+
+import co.com.iesonline.sjies.domain.enumeration.Estado;
+import co.com.iesonline.sjies.service.OperadorService;
 import co.com.iesonline.sjies.service.SorteoService;
 import co.com.iesonline.sjies.web.rest.errors.BadRequestAlertException;
 import co.com.iesonline.sjies.web.rest.util.HeaderUtil;
@@ -36,8 +39,11 @@ public class SorteoResource {
 
     private final SorteoService sorteoService;
 
-    public SorteoResource(SorteoService sorteoService) {
+    private final OperadorService operadorService;
+    
+    public SorteoResource(SorteoService sorteoService, OperadorService operadorService) {
         this.sorteoService = sorteoService;
+        this.operadorService = operadorService;
     }
 
     /**
@@ -50,11 +56,23 @@ public class SorteoResource {
     @PostMapping("/sorteos")
     @Timed
     public ResponseEntity<SorteoDTO> createSorteo(@Valid @RequestBody SorteoDTO sorteoDTO) throws URISyntaxException {
-        log.debug("REST request to save Sorteo : {}", sorteoDTO);
-        if (sorteoDTO.getId() != null) {
+        
+    	log.debug("REST request to save Sorteo : {}", sorteoDTO);
+        
+    	if (sorteoDTO.getId() != null) {
             throw new BadRequestAlertException("A new sorteo cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        
+        //set "Estado" by default
+        sorteoDTO.setEstado(Estado.ACTIVO);
+        
         SorteoDTO result = sorteoService.save(sorteoDTO);
+        
+        //update sorteos activos
+        if (operadorService.updateSorteosActivos(sorteoDTO.getOperadorId(), sorteoDTO) == null) {
+            throw new BadRequestAlertException("updateOperator - Invalid id", ENTITY_NAME, "idnull");
+        }
+        
         return ResponseEntity.created(new URI("/api/sorteos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -72,11 +90,20 @@ public class SorteoResource {
     @PutMapping("/sorteos")
     @Timed
     public ResponseEntity<SorteoDTO> updateSorteo(@Valid @RequestBody SorteoDTO sorteoDTO) throws URISyntaxException {
-        log.debug("REST request to update Sorteo : {}", sorteoDTO);
-        if (sorteoDTO.getId() == null) {
+        
+    	log.debug("REST request to update Sorteo : {}", sorteoDTO);
+        
+    	if (sorteoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        SorteoDTO result = sorteoService.save(sorteoDTO);
+        
+    	SorteoDTO result = sorteoService.save(sorteoDTO);
+        
+        //update sorteos activos
+        if (operadorService.updateSorteosActivos(sorteoDTO.getOperadorId(), sorteoDTO) == null) {
+            throw new BadRequestAlertException("updateOperator - Invalid id", ENTITY_NAME, "idnull");
+        }
+        
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, sorteoDTO.getId().toString()))
             .body(result);

@@ -138,8 +138,8 @@ public class SorteoDTO implements Serializable {
             ", estado='" + getEstado() + "'" +
             ", fechaRealizacion='" + getFechaRealizacion() + "'" +
             ", ganador='" + getGanador() + "'" +
-            ", operador=" + getOperadorId() +
-            ", operador='" + getOperadorNombre() + "'" +
+            ", operadorId=" + getOperadorId() +
+            ", operadorNombre='" + getOperadorNombre() + "'" +
             "}";
     }
 }
