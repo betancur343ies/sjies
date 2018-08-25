@@ -142,3 +142,8 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# H2
+######################
+.h2.server.properties
