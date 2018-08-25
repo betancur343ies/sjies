@@ -17,11 +17,11 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nombre"><span jhiTranslate="sjiesApp.sorteo.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tipo"><span jhiTranslate="sjiesApp.sorteo.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="fechaCreacion"><span jhiTranslate="sjiesApp.sorteo.fechaCreacion">Fecha Creacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="estado"><span jhiTranslate="sjiesApp.sorteo.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="fechaRealizacion"><span jhiTranslate="sjiesApp.sorteo.fechaRealizacion">Fecha Realizacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="ganador"><span jhiTranslate="sjiesApp.sorteo.ganador">Ganador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fechaCreacion"><span jhiTranslate="sjiesApp.sorteo.fechaCreacion">Fecha Creación</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fechaRealizacion"><span jhiTranslate="sjiesApp.sorteo.fechaRealizacion">Fecha Realización</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="operadorNombre"><span jhiTranslate="sjiesApp.sorteo.operador">Operador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estado"><span jhiTranslate="sjiesApp.sorteo.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ganador"><span jhiTranslate="sjiesApp.sorteo.ganador">Ganador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -31,14 +31,14 @@
                 <td>{{sorteo.nombre}}</td>
                 <td jhiTranslate="{{'sjiesApp.Juegos.' + sorteo.tipo}}">{{sorteo.tipo}}</td>
                 <td>{{sorteo.fechaCreacion | date:'medium'}}</td>
-                <td jhiTranslate="{{'sjiesApp.Estado.' + sorteo.estado}}">{{sorteo.estado}}</td>
                 <td>{{sorteo.fechaRealizacion | date:'medium'}}</td>
-                <td>{{sorteo.ganador}}</td>
                 <td>
                     <div *ngIf="sorteo.operadorId">
                         <a [routerLink]="['../operador-my-suffix', sorteo.operadorId , 'view' ]" >{{sorteo.operadorNombre}}</a>
                     </div>
                 </td>
+                <td jhiTranslate="{{'sjiesApp.Estado.' + sorteo.estado}}">{{sorteo.estado}}</td>                
+                <td>{{sorteo.ganador}}</td>                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

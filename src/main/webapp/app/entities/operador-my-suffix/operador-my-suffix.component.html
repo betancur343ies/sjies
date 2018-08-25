@@ -16,9 +16,9 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nombre"><span jhiTranslate="sjiesApp.operador.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="fechaCreacion"><span jhiTranslate="sjiesApp.operador.fechaCreacion">Fecha Creacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="totalSorteos"><span jhiTranslate="sjiesApp.operador.totalSorteos">Total Sorteos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fechaCreacion"><span jhiTranslate="sjiesApp.operador.fechaCreacion">Fecha Creación</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sorteosActivos"><span jhiTranslate="sjiesApp.operador.sorteosActivos">Sorteos Activos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="totalSorteos"><span jhiTranslate="sjiesApp.operador.totalSorteos">Total Sorteos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -27,8 +27,8 @@
                 <td><a [routerLink]="['/operador-my-suffix', operador.id, 'view' ]">{{operador.id}}</a></td>
                 <td>{{operador.nombre}}</td>
                 <td>{{operador.fechaCreacion | date:'medium'}}</td>
-                <td>{{operador.totalSorteos}}</td>
                 <td>{{operador.sorteosActivos}}</td>
+                <td>{{operador.totalSorteos}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

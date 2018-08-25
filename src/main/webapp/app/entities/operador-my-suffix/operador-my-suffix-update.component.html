@@ -21,10 +21,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="sjiesApp.operador.fechaCreacion" for="field_fechaCreacion">Fecha Creacion</label>
+                    <label class="form-control-label" jhiTranslate="sjiesApp.operador.fechaCreacion" for="field_fechaCreacion">Fecha Creación</label>
                     <div class="d-flex">
                         <input id="field_fechaCreacion" type="datetime-local" class="form-control" name="fechaCreacion" [(ngModel)]="fechaCreacion"
-                        required/>
+                        required readonly/>
                     </div>
                     <div [hidden]="!(editForm.controls.fechaCreacion?.dirty && editForm.controls.fechaCreacion?.invalid)">
                         <small class="form-text text-danger"
@@ -38,14 +38,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="sjiesApp.operador.totalSorteos" for="field_totalSorteos">Total Sorteos</label>
-                    <input type="number" class="form-control" name="totalSorteos" id="field_totalSorteos"
-                        [(ngModel)]="operador.totalSorteos" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sjiesApp.operador.sorteosActivos" for="field_sorteosActivos">Sorteos Activos</label>
                     <input type="number" class="form-control" name="sorteosActivos" id="field_sorteosActivos"
-                        [(ngModel)]="operador.sorteosActivos" />
+                        [(ngModel)]="operador.sorteosActivos" readonly/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sjiesApp.operador.totalSorteos" for="field_totalSorteos">Total Sorteos</label>
+                    <input type="number" class="form-control" name="totalSorteos" id="field_totalSorteos"
+                        [(ngModel)]="operador.totalSorteos" readonly/>
                 </div>
 
             </div>
