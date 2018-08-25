@@ -11,17 +11,21 @@ import { SorteoMySuffixService } from './sorteo-my-suffix.service';
 import { IOperadorMySuffix } from 'app/shared/model/operador-my-suffix.model';
 import { OperadorMySuffixService } from 'app/entities/operador-my-suffix';
 
+import { Estado } from 'app/shared/model/sorteo-my-suffix.model';
+
 @Component({
     selector: 'jhi-sorteo-my-suffix-update',
     templateUrl: './sorteo-my-suffix-update.component.html'
 })
 export class SorteoMySuffixUpdateComponent implements OnInit {
     private _sorteo: ISorteoMySuffix;
+
     isSaving: boolean;
 
     operadors: IOperadorMySuffix[];
     fechaCreacion: string;
     fechaRealizacion: string;
+    estado: Estado;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -41,6 +45,8 @@ export class SorteoMySuffixUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+
+        this.sorteo.estado = Estado.ACTIVO;
     }
 
     previousState() {
