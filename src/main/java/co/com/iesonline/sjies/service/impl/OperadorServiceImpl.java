@@ -92,32 +92,34 @@ public class OperadorServiceImpl implements OperadorService {
     }
     
     /**
-     * Update  sorteosActivos n totalSorteos of an Operator.
+     * Update counters of "sorteosActivos" n "totalSorteos" of an operator.
      * 
      * @param operatorId
      * @param sorteoDTO
+     * @param creatingSorteo
      * @return
      */
-    public Long updateSorteosActivos(Long operatorId, @Valid SorteoDTO sorteoDTO) {
+    public Long updateCounters(Long operatorId, @Valid SorteoDTO sorteoDTO, Boolean creatingSorteo) {
     	
     	log.debug("Request to update Sorteos Info : {}", operatorId);
     
     	//find operator by id
     	Optional<OperadorDTO> operadorDTO = findOne(operatorId);
     	
-    	
-    	if (sorteoDTO.getEstado().equals(Estado.ACTIVO)) {
+    	//update totalSorteos
+    	if (creatingSorteo) {
     		
-    		//set sorteosActivos
+    		operadorDTO.get().setTotalSorteos(operadorDTO.get().getTotalSorteos() + 1);
+		}
+    	
+    	//update sorteosActivos
+    	if (sorteoDTO.getEstado().equals(Estado.ACTIVO)) {    		
+    	
     		operadorDTO.get().setSorteosActivos(operadorDTO.get().getSorteosActivos() + 1);
-    		//set totalSorteos
-        	operadorDTO.get().setTotalSorteos(operadorDTO.get().getTotalSorteos() + 1);
 		} else {
     		
-    		//set sorteosActivos
     		operadorDTO.get().setSorteosActivos(operadorDTO.get().getSorteosActivos() - 1);
-		}
-    			   	
+		}    			   	
     	
     	//update Operator
         OperadorDTO result = save(operadorDTO.get());

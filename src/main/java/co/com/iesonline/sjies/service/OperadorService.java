@@ -48,11 +48,12 @@ public interface OperadorService {
     void delete(Long id);
     
     /**
-     * Update "sorteosActivos" n "totalSorteos" Operator.
+     * Update counters of "sorteosActivos" n "totalSorteos" of an operator.
      * 
      * @param operatorId
      * @param sorteoDTO
+     * @param creatingSorteo
      * @return
      */
-    Long updateSorteosActivos(Long operatorId, @Valid SorteoDTO sorteoDTO);
+    Long updateCounters(Long operatorId, @Valid SorteoDTO sorteoDTO, Boolean creatingSorteo);
 }
